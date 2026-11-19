@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { FcFlowChart } from "react-icons/fc";
+import { Link } from "react-router";
+import { FaCopyright } from "react-icons/fa";
 
 const Container = styled.aside<{
     $collapsed: boolean;
@@ -33,12 +35,26 @@ const SideHeader = styled.header<{
 
     min-height: 100px;
     gap: 10px;
+    
+    border-bottom: black solid 1px;
 
     white-space: nowrap;
 `;
 
 const LogoContainer = styled.div`
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
+    
+    gap: 10px;
+`;
+
+const ToggleButton = styled.button`
+    flex-shrink: 0;
+    
+    border: none;
+    border-radius: 4px;
+    padding-top: 2px;
 `;
 
 const ContentContainer = styled.nav`
@@ -47,7 +63,6 @@ const ContentContainer = styled.nav`
 
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
 `;
 
 const SideContent = styled.div<{
@@ -65,10 +80,6 @@ const SideContent = styled.div<{
     white-space: nowrap;
 `;
 
-const ToggleButton = styled.button`
-    flex-shrink: 0;
-`;
-
 const SideFooter = styled.footer`
     display: flex;
     justify-content: center;
@@ -76,6 +87,8 @@ const SideFooter = styled.footer`
 
     min-height: 50px;
     margin-top: auto;
+    
+    border-top: black solid 1px;
 `;
 
 type SidebarProps = {
@@ -104,27 +117,27 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
             <ContentContainer>
                 <SideContent $collapsed={collapsed}>
                     <span>🏠</span>
-                    {!collapsed && <span>홈</span>}
+                    {!collapsed && <Link to={"/"}>홈</Link>}
                 </SideContent>
 
                 <SideContent $collapsed={collapsed}>
                     <span>📊</span>
-                    {!collapsed && <span>ToDoList</span>}
+                    {!collapsed && <Link to={"/TodoList"}>ToDoList</Link>}
                 </SideContent>
 
                 <SideContent $collapsed={collapsed}>
                     <span>🛒</span>
-                    {!collapsed && <span>Cart</span>}
+                    {!collapsed && <span>Coin</span>}
                 </SideContent>
 
                 <SideContent $collapsed={collapsed}>
                     <span>💰</span>
-                    {!collapsed && <span>Budget</span>}
+                    {!collapsed && <span>Movie</span>}
                 </SideContent>
 
                 <SideContent $collapsed={collapsed}>
                     <span>🪙</span>
-                    {!collapsed && <span>Coin</span>}
+                    {!collapsed && <span>Product</span>}
                 </SideContent>
 
                 <SideContent $collapsed={collapsed}>
@@ -133,7 +146,9 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
                 </SideContent>
             </ContentContainer>
 
-            <SideFooter>{!collapsed && <span>Copyright 2026 Practice</span>}</SideFooter>
+            <SideFooter>
+                {!collapsed ? <span>Copyright 2026 Practice</span> : <FaCopyright />}
+            </SideFooter>
         </Container>
     );
 };

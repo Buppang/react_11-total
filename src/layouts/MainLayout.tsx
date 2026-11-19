@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar.tsx";
-import Home from "../pages/Home.tsx";
 import styled from "styled-components";
+import { Outlet } from "react-router";
 
 const Layout = styled.div`
     display: flex;
@@ -25,7 +25,7 @@ function MainLayout() {
         <Layout>
             <Sidebar collapsed={collapsed} onToggle={handleToggle} />
             <Main>
-                <Home />
+                <Outlet />
             </Main>
         </Layout>
     );
