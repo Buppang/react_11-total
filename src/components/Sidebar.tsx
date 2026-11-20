@@ -1,8 +1,16 @@
 import styled from "styled-components";
-import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
-import { FcFlowChart } from "react-icons/fc";
+import {
+    MdAutoAwesomeMotion,
+    MdKeyboardDoubleArrowLeft,
+    MdKeyboardDoubleArrowRight,
+    MdLocalMovies,
+} from "react-icons/md";
+import { FcOpenedFolder } from "react-icons/fc";
 import { Link } from "react-router";
-import { FaCopyright } from "react-icons/fa";
+import { FaCoins, FaCopyright } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
+import { FaBoxArchive } from "react-icons/fa6";
+import { IoPeople } from "react-icons/io5";
 
 const Container = styled.aside<{
     $collapsed: boolean;
@@ -10,17 +18,18 @@ const Container = styled.aside<{
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    background-color: #f1f1f1;
 
     width: ${({ $collapsed }) => ($collapsed ? "64px" : "260px")};
     height: 100vh;
     box-sizing: border-box;
-    
-    padding: 15px;
+
+    padding: ${({ $collapsed }) => ($collapsed ? "5px" : "15px")};
 
     flex-shrink: 0;
     overflow: hidden;
 
-    border-right: 1px solid black;
+    // border-right: 1px solid #969696;
     transition: width 0.3s ease;
 `;
 
@@ -34,9 +43,10 @@ const SideHeader = styled.header<{
     justify-content: ${({ $collapsed }) => ($collapsed ? "center" : "space-between")};
 
     min-height: 100px;
+    padding: ${({ $collapsed }) => ($collapsed ? "5px" : "15px")};
     gap: 10px;
-    
-    border-bottom: black solid 1px;
+
+    border-bottom: 1px solid #969696;
 
     white-space: nowrap;
 `;
@@ -46,8 +56,13 @@ const LogoContainer = styled.div`
     align-items: center;
     flex-shrink: 0;
     
-    gap: 10px;
+    gap: 12px;
 `;
+
+const LogoTitle = styled.span`
+    font-weight: bold;
+    font-size: 18px;
+`
 
 const ToggleButton = styled.button`
     flex-shrink: 0;
@@ -65,7 +80,7 @@ const ContentContainer = styled.nav`
     min-height: 0;
 `;
 
-const SideContent = styled.div<{
+const SideContent = styled(Link)<{
     $collapsed: boolean;
 }>`
     display: flex;
@@ -73,11 +88,15 @@ const SideContent = styled.div<{
     justify-content: ${({ $collapsed }) => ($collapsed ? "center" : "flex-start")};
 
     min-height: 65px;
-    padding: 0 15px;
     gap: 15px;
+    padding: ${({ $collapsed }) => ($collapsed ? "5px" : "15px")};
 
     flex-shrink: 0;
     white-space: nowrap;
+
+    > svg {
+        flex-shrink: 0;
+    }
 `;
 
 const SideFooter = styled.footer`
@@ -87,8 +106,9 @@ const SideFooter = styled.footer`
 
     min-height: 50px;
     margin-top: auto;
-    
-    border-top: black solid 1px;
+
+    white-space: nowrap;
+    border-top: 1px solid #969696;
 `;
 
 type SidebarProps = {
@@ -101,8 +121,8 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
         <Container $collapsed={collapsed}>
             <SideHeader $collapsed={collapsed}>
                 <LogoContainer>
-                    <FcFlowChart size={65} />
-                    {!collapsed && <span>Portfolio</span>}
+                    <FcOpenedFolder size={collapsed ? 35 : 60} />
+                    {!collapsed && <LogoTitle>Portfolio</LogoTitle>}
                 </LogoContainer>
 
                 <ToggleButton onClick={onToggle}>
@@ -115,33 +135,33 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
             </SideHeader>
 
             <ContentContainer>
-                <SideContent $collapsed={collapsed}>
-                    <span>🏠</span>
-                    {!collapsed && <Link to={"/"}>홈</Link>}
+                <SideContent to={"/"} $collapsed={collapsed}>
+                    <IoMdHome size={25} />
+                    {!collapsed && <span>Home</span>}
                 </SideContent>
 
-                <SideContent $collapsed={collapsed}>
-                    <span>📊</span>
-                    {!collapsed && <Link to={"/TodoList"}>ToDoList</Link>}
+                <SideContent to={"/TodoList"} $collapsed={collapsed}>
+                    <MdAutoAwesomeMotion size={25} />
+                    {!collapsed && <span>ToDoList</span>}
                 </SideContent>
 
-                <SideContent $collapsed={collapsed}>
-                    <span>🛒</span>
+                <SideContent to={"/Coin"} $collapsed={collapsed}>
+                    <FaCoins size={25} />
                     {!collapsed && <span>Coin</span>}
                 </SideContent>
 
-                <SideContent $collapsed={collapsed}>
-                    <span>💰</span>
+                <SideContent to={"/Movie"} $collapsed={collapsed}>
+                    <MdLocalMovies size={25} />
                     {!collapsed && <span>Movie</span>}
                 </SideContent>
 
-                <SideContent $collapsed={collapsed}>
-                    <span>🪙</span>
+                <SideContent to={"/Product"} $collapsed={collapsed}>
+                    <FaBoxArchive size={25} />
                     {!collapsed && <span>Product</span>}
                 </SideContent>
 
-                <SideContent $collapsed={collapsed}>
-                    <span>📋</span>
+                <SideContent to={""} $collapsed={collapsed}>
+                    <IoPeople size={25} />
                     {!collapsed && <span>Board</span>}
                 </SideContent>
             </ContentContainer>
