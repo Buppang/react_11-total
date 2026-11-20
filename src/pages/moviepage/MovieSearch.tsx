@@ -16,12 +16,23 @@ export type Movie = {
     Plot: string;
 };
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+`;
+
 const List = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 100px;
     justify-content: center;
+
+    width: 100%;
+    gap: 20px;
 `;
 
 function Search() {
@@ -54,12 +65,14 @@ function Search() {
     }, [keyword]);
 
     return (
-        <div>
+        <Container>
             <h3>
                 Result: {list.length} {keyword}{" "}
                 {list.length > 1 ? <span>movies</span> : <span>movie</span>}
             </h3>
+
             <SearchBar keyword={keyword} />
+
             <List>
                 {loading ? (
                     <div>Loading...</div>
@@ -71,7 +84,7 @@ function Search() {
                     })
                 )}
             </List>
-        </div>
+        </Container>
     );
 }
 

@@ -1,12 +1,13 @@
-import  { createBrowserRouter, type RouteObject } from "react-router";
+import { createBrowserRouter, type RouteObject } from "react-router";
 import MainLayout from "../layouts/MainLayout.tsx";
 import Home from "../pages/Home.tsx";
 import TodoList from "../pages/TodoList.tsx";
 import Coin from "../pages/Coin.tsx";
-import Product from "../pages/Product.tsx";
 import Movie from "../pages/moviepage/Moive.tsx";
 import MovieSearch from "../pages/moviepage/MovieSearch.tsx";
 import MovieDetail from "../pages/moviepage/MovieDetail.tsx";
+import ProductDetail from "../pages/productpage/ProductDetail.tsx";
+import ProductList from "../pages/productpage/ProductList.tsx";
 
 const AppRouter = () => {
     const routes: RouteObject[] = [
@@ -25,13 +26,17 @@ const AppRouter = () => {
                         { path: "detail/:id", element: <MovieDetail /> },
                     ],
                 },
-                { path: "/Search", element: <MovieSearch /> },
-                { path: "/detail/:id", element: <MovieDetail /> },
-                { path: "/Product", element: <Product /> },
+                {
+                    path: "Product",
+                    children: [
+                        { index: true, element: <ProductList /> },
+                        { path: "detail/:id", element: <ProductDetail /> },
+                    ],
+                },
             ],
         },
     ];
     return createBrowserRouter(routes);
-}
+};
 
 export default AppRouter;

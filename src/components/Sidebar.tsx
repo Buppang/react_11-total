@@ -21,7 +21,7 @@ const Container = styled.aside<{
     background-color: #f1f1f1;
 
     width: ${({ $collapsed }) => ($collapsed ? "64px" : "260px")};
-    height: 100vh;
+    height: 100%;
     box-sizing: border-box;
 
     padding: ${({ $collapsed }) => ($collapsed ? "5px" : "15px")};

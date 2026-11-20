@@ -5,16 +5,18 @@ import { Outlet } from "react-router";
 
 const Layout = styled.div`
     display: flex;
-    min-height: 100vh;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
 `;
 
 const Main = styled.main`
     flex: 1;
     min-width: 0;
+    overflow-y: auto;
 `;
 
 function MainLayout() {
-
     const [collapsed, setCollapsed] = useState(true);
 
     const handleToggle = () => {
