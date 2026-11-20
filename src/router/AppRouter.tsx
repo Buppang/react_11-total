@@ -2,7 +2,7 @@ import { createBrowserRouter, type RouteObject } from "react-router";
 import MainLayout from "../layouts/MainLayout.tsx";
 import Home from "../pages/Home.tsx";
 import TodoList from "../pages/TodoList.tsx";
-import Coin from "../pages/Coin.tsx";
+import Coin from "../pages/coinpage/Coin.tsx"
 import Movie from "../pages/moviepage/Moive.tsx";
 import MovieSearch from "../pages/moviepage/MovieSearch.tsx";
 import MovieDetail from "../pages/moviepage/MovieDetail.tsx";
