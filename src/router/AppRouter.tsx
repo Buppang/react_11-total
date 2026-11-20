@@ -8,6 +8,8 @@ import MovieSearch from "../pages/moviepage/MovieSearch.tsx";
 import MovieDetail from "../pages/moviepage/MovieDetail.tsx";
 import ProductDetail from "../pages/productpage/ProductDetail.tsx";
 import ProductList from "../pages/productpage/ProductList.tsx";
+import BoardDetail from "../pages/boardpage/BoardDetail.tsx";
+import Board from "../pages/boardpage/Board.tsx";
 
 const AppRouter = () => {
     const routes: RouteObject[] = [
@@ -33,6 +35,13 @@ const AppRouter = () => {
                         { path: "detail/:id", element: <ProductDetail /> },
                     ],
                 },
+                {
+                    path: "Board",
+                    children: [
+                        { index: true, element: <Board />},
+                        { path: "detail/:id", element: <BoardDetail />},
+                    ]
+                }
             ],
         },
     ];

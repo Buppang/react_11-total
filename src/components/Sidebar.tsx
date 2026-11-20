@@ -160,7 +160,7 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
                     {!collapsed && <span>Product</span>}
                 </SideContent>
 
-                <SideContent to={""} $collapsed={collapsed}>
+                <SideContent to={"/Board"} $collapsed={collapsed}>
                     <IoPeople size={25} />
                     {!collapsed && <span>Board</span>}
                 </SideContent>
