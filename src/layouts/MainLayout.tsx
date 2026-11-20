@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar.tsx";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { Outlet } from "react-router";
+import GlobalStyle from "../styles/GlobalStyle.ts";
+import { darkTheme, lightTheme } from "../contexts/theme/Theme.ts";
 
 const Layout = styled.div`
     display: flex;
@@ -19,17 +21,35 @@ const Main = styled.main`
 function MainLayout() {
     const [collapsed, setCollapsed] = useState(true);
 
+    const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
+
     const handleToggle = () => {
         setCollapsed(prev => !prev);
     };
 
+    const handleThemeToggle = () => {
+        setIsDark(prev => !prev);
+    };
+
+    useEffect(() => {
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    }, [isDark]);
+
     return (
-        <Layout>
-            <Sidebar collapsed={collapsed} onToggle={handleToggle} />
-            <Main>
-                <Outlet />
-            </Main>
-        </Layout>
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+            <GlobalStyle />
+            <Layout>
+                <Sidebar
+                    collapsed={collapsed}
+                    onToggle={handleToggle}
+                    isDark={isDark}
+                    onThemeToggle={handleThemeToggle}
+                />
+                <Main>
+                    <Outlet />
+                </Main>
+            </Layout>
+        </ThemeProvider>
     );
 }
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
-import { StyledContainer, StyledLoading } from "../../styles/ProductStyle.tsx";
+import { StyledContainer, StyledLoading } from "../../styles/CommonStyle.ts";
+import { StyledPrice } from "../../styles/ProductStyle.tsx";
 
 export type Product = {
     id: number;
@@ -60,11 +61,6 @@ const StyledInfo = styled.div`
 const StyledName = styled.h3`
     font-size: 16px;
     margin-bottom: 6px;
-`;
-
-const StyledPrice = styled.p`
-    font-weight: bold;
-    color: #2563eb;
 `;
 
 function ProductList() {

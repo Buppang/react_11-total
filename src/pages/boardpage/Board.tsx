@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import styled, { css } from "styled-components";
-import { StyledContainer, StyledLoading } from "../../styles/BoardStyle.tsx";
+import { StyledContainer, StyledLoading } from "../../styles/CommonStyle.ts";
 
 export type Post = {
     userId: number;

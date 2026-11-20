@@ -4,6 +4,8 @@ import {
     MdKeyboardDoubleArrowLeft,
     MdKeyboardDoubleArrowRight,
     MdLocalMovies,
+    MdDarkMode,
+    MdLightMode
 } from "react-icons/md";
 import { FcOpenedFolder } from "react-icons/fc";
 import { Link } from "react-router";
@@ -12,13 +14,20 @@ import { IoMdHome } from "react-icons/io";
 import { FaBoxArchive } from "react-icons/fa6";
 import { IoPeople } from "react-icons/io5";
 
+type SidebarProps = {
+    collapsed: boolean;
+    onToggle: () => void;
+    isDark: boolean;
+    onThemeToggle: () => void;
+};
+
 const Container = styled.aside<{
     $collapsed: boolean;
 }>`
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: #f1f1f1;
+    background-color: ${({ theme }) => theme.sidebar};
 
     width: ${({ $collapsed }) => ($collapsed ? "64px" : "260px")};
     height: 100%;
@@ -29,7 +38,6 @@ const Container = styled.aside<{
     flex-shrink: 0;
     overflow: hidden;
 
-    // border-right: 1px solid #969696;
     transition: width 0.3s ease;
 `;
 
@@ -46,7 +54,7 @@ const SideHeader = styled.header<{
     padding: ${({ $collapsed }) => ($collapsed ? "5px" : "15px")};
     gap: 10px;
 
-    border-bottom: 1px solid #969696;
+    border-bottom: 1px solid ${({ theme }) => theme.border};
 
     white-space: nowrap;
 `;
@@ -69,7 +77,10 @@ const ToggleButton = styled.button`
     
     border: none;
     border-radius: 4px;
-    padding-top: 2px;
+    padding-top: 6px;
+
+    background-color: transparent;
+    color: ${({ theme }) => theme.text};
 `;
 
 const ContentContainer = styled.nav`
@@ -99,6 +110,27 @@ const SideContent = styled(Link)<{
     }
 `;
 
+const ThemeButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 45px;
+    margin-bottom: 10px;
+
+    background-color: transparent;
+    color: ${({ theme }) => theme.text};
+
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.hover};
+    }
+`;
+
 const SideFooter = styled.footer`
     display: flex;
     justify-content: center;
@@ -108,15 +140,10 @@ const SideFooter = styled.footer`
     margin-top: auto;
 
     white-space: nowrap;
-    border-top: 1px solid #969696;
+    border-top: 1px solid ${({ theme }) => theme.border};
 `;
 
-type SidebarProps = {
-    collapsed: boolean;
-    onToggle: () => void;
-};
-
-const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
+const Sidebar = ({ collapsed, onToggle, isDark, onThemeToggle }: SidebarProps) => {
     return (
         <Container $collapsed={collapsed}>
             <SideHeader $collapsed={collapsed}>
@@ -165,6 +192,12 @@ const Sidebar = ({ collapsed, onToggle }: SidebarProps) => {
                     {!collapsed && <span>Board</span>}
                 </SideContent>
             </ContentContainer>
+
+            <ThemeButton onClick={onThemeToggle}>
+                {isDark ? <MdLightMode size={25} /> : <MdDarkMode size={25} />}
+
+                {!collapsed && <span>{isDark ? "Light Mode" : "Dark Mode"}</span>}
+            </ThemeButton>
 
             <SideFooter>
                 {!collapsed ? <span>Copyright 2026 Practice</span> : <FaCopyright />}

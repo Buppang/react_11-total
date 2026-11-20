@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import type { Post } from "./Board.tsx";
-import { StyledContainer, StyledLoading } from "../../styles/BoardStyle.tsx";
 import styled from "styled-components";
+import { StyledContainer, StyledLoading } from "../../styles/CommonStyle.ts";
 
 const StyledBackLink = styled(Link)`
     color: #666666;

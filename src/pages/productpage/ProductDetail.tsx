@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import type { Product } from "./ProductList.tsx";
-import { StyledContainer, StyledLoading } from "../../styles/ProductStyle.tsx";
 import styled from "styled-components";
+import { StyledContainer, StyledLoading } from "../../styles/CommonStyle.ts";
+import { StyledDetailPrice } from "../../styles/ProductStyle.tsx";
 
 const StyledBackLink = styled(Link)`
     color: #666666;
@@ -43,12 +44,6 @@ const StyledProductInfo = styled.div`
 const StyledSku = styled.p`
     font-size: 10px;
     color: #666666;
-`;
-
-const StyledPrice = styled.p`
-    font-weight: bold;
-    font-size: 18px;
-    color: #2563eb;
 `;
 
 const StyledStuff = styled.p`
@@ -116,7 +111,7 @@ function ProductDetail() {
 
                             <p>Rating : {post.rating}</p>
 
-                            <StyledPrice>${post.price}</StyledPrice>
+                            <StyledDetailPrice>${post.price}</StyledDetailPrice>
 
                             <br />
 
